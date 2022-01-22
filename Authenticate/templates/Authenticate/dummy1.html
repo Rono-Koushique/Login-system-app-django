@@ -1,0 +1,40 @@
+{% extends 'Authenticate/base.html' %}
+{% load static %}
+
+{% block Header %}
+    <link rel="stylesheet" href="{% static 'Authenticate/home.css' %}">
+{% endblock Header %}
+
+{% block Content %}
+    <h1>Hello, this is the webpage</h1>
+    <button type="submit"><a href="logout">Sign out</a></button>
+    <a href="admin">Django admin page</a>
+    <!-- for showing the toast message -->
+    {% if messages %}
+        <script>
+            var acc = true;
+        </script>
+    {% endif %}
+    <div id="snackbar">
+        {% for message in messages %} {{ message }} {% endfor %}
+    </div>
+    
+
+    <script>
+        function myFunction() {
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar");
+    
+            // Add the "show" class to DIV
+            x.className = "show";
+    
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+    
+        if (acc == true) {
+            myFunction();
+        }
+    
+    </script>
+{% endblock %}

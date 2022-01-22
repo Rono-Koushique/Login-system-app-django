@@ -1,0 +1,77 @@
+{% extends 'Authenticate/base.html' %}
+{% load static %}
+
+{% block Header %}
+    <link rel="stylesheet" href="{% static 'Authenticate/register.css' %}">
+{% endblock Header %}
+
+{% block Content %}
+    <div class="text-center mt-5">
+        <form method="post" style="max-width: 25%; margin: auto">
+            {% csrf_token %}
+            <h1 class="h3 font-weight-normal form-title register">Registration</h1>
+            
+            <!-- username box -->
+            <input type="text" id="username" class="form-control form-box"
+            name="username" placeholder="Username" autocomplete="off">
+
+            <!-- email box -->
+            <input type="email" id="email-address" class="form-control form-box"
+            name="email-address" placeholder="Email Address">
+
+            <!-- password box -->
+            <input type="password" id="password" class="form-control form-box"
+            name="password" placeholder="Password">
+
+            <!-- confirm password box -->
+            <input type="password" id="confirm-password" class="form-control form-box"
+            name="confirm-password" placeholder="Confirm Password">
+
+
+            <!-- create account button -->
+            <div class="button-line">    
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        Create Account
+                    </button>
+                </div>
+            </div>
+
+
+            <!-- already have an account button -->
+            <div class="create-account">
+                Already have an account ? Login <a href="{% url 'auth-login' %}">here</a>
+            </div>
+        </form>
+
+
+        <!-- for showing the toast message -->
+        {% if messages %}
+            <script>
+                var acc = true;
+            </script>
+        {% endif %}
+        <div id="snackbar">
+            {% for message in messages %} {{ message }} {% endfor %}
+        </div>
+        
+    </div>    
+
+    <script>
+        function myFunction() {
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar");
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+
+        if (acc == true) {
+            myFunction();
+        }
+
+    </script>
+{% endblock %}
